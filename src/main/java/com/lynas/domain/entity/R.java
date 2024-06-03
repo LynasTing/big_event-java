@@ -1,11 +1,13 @@
-package domain.entity;
+package com.lynas.domain.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 // 统一响应格式
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class R<T> {
   /**
    * 200 成功

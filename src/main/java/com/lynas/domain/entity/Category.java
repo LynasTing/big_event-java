@@ -1,4 +1,4 @@
-package domain.entity;
+package com.lynas.domain.entity;
 
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -9,40 +9,28 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 
 /**
- * (Article)表实体类
+ * (Category)表实体类
  *
  * @author LynasTing
- * @since 2024-06-03 10:19:58
+ * @since 2024-06-03 10:20:24
  */
-@TableName("article")
+@TableName("category")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Article implements Serializable {
+public class Category implements Serializable {
     /**
      * ID
      */
     private String id;
     /**
-     * 文章标题
+     * 分类名称
      */
-    private String title;
+    private String categoryName;
     /**
-     * 文章内容
+     * 分类别名
      */
-    private String content;
-    /**
-     * 文章封面
-     */
-    private String coverImg;
-    /**
-     * 文章状态: 只能是[已发布] 或者 [草稿]
-     */
-    private String state;
-    /**
-     * 文章分类ID
-     */
-    private String categoryId;
+    private String categoryAlias;
     /**
      * 创建人ID
      */
