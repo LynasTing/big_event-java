@@ -9,3 +9,6 @@ server:
 logging:
   level:
     org.springframework: DEBUG
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true # 开启驼峰命名和下划线命名的自动转换

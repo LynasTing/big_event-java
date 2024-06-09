@@ -1,6 +1,9 @@
 package com.lynas.domain.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +35,7 @@ public class User implements Serializable {
     /**
      * 密码
      */
+    @JsonIgnore // 在将对象转为JSON时忽略当前参数
     private String password;
     
     /**
@@ -41,7 +45,7 @@ public class User implements Serializable {
     
     /**
      * 邮箱
-     */
+     */ 
     private String email;
     
     /**
@@ -52,10 +56,10 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
     
     /**
      * 修改时间
      */
-    private Date updateTime;
+    private LocalDateTime updateTime;
 }

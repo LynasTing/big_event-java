@@ -7,7 +7,7 @@ import com.lynas.constants.SystemConst;
 import java.util.Date;
 import java.util.Map;
 
-public class JwtUtils {
+public class JwtUtil {
   /**
    * 接受业务数据，生成token并返回
    */

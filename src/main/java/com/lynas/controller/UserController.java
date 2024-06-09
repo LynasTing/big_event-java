@@ -3,14 +3,13 @@ package com.lynas.controller;
 import com.lynas.domain.entity.R;
 import com.lynas.domain.entity.User;
 import com.lynas.service.UserService;
-import com.lynas.utils.JwtUtils;
+import com.lynas.utils.JwtUtil;
 import com.lynas.utils.Md5Util;
+import com.lynas.utils.ThreadLocalUtil;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,9 +52,22 @@ public class UserController {
       Map<String, Object> claims = new HashMap<>();
       claims.put("username", loginUser.getUsername());
       claims.put("password", loginUser.getPassword());
-      return R.success(JwtUtils.createToken(claims));
+      return R.success(JwtUtil.createToken(claims));
     } else {
       return R.error("密码错误");
     }
+  }
+
+  /**
+   * 用户信息
+   */
+  @GetMapping("/info")
+  public R<User> userInfo(@RequestHeader(name = "Authorization") String token) {
+  //   Map<String, Object> claims = JwtUtil.parseToken(token);
+  //   String username = (String) claims.get("username");
+    Map<String, Object> map = ThreadLocalUtil.get();
+    String username = (String) map.get("username");
+    User user = userService.findByUsername(username);
+    return R.success(user);
   }
 }
