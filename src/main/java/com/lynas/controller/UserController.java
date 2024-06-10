@@ -70,4 +70,12 @@ public class UserController {
     User user = userService.findByUsername(username);
     return R.success(user);
   }
+
+  /**
+   * 更新用户信息
+   */
+  @PutMapping("put")
+  public R putUserInfo(@RequestBody User user) {
+    return userService.putUserInfo(user);
+  }
 }
