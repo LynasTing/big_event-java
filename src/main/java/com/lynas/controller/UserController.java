@@ -75,7 +75,7 @@ public class UserController {
    * 更新用户信息
    */
   @PutMapping("put")
-  public R putUserInfo(@RequestBody User user) {
+  public R putUserInfo(@RequestBody @Validated User user) {
     return userService.putUserInfo(user);
   }
 }
