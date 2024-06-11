@@ -1,5 +1,7 @@
 package com.lynas.interceptors;
 
+import com.lynas.domain.entity.User;
+import com.lynas.service.UserService;
 import com.lynas.utils.JwtUtil;
 import com.lynas.utils.ThreadLocalUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import java.util.Map;
  */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
+
+  private UserService userService;
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     String token = request.getHeader("Authorization");

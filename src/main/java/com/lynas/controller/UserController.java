@@ -7,6 +7,7 @@ import com.lynas.utils.JwtUtil;
 import com.lynas.utils.Md5Util;
 import com.lynas.utils.ThreadLocalUtil;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,7 @@ public class UserController {
     if (Md5Util.getMD5String(password).equals(loginUser.getPassword())) {
       Map<String, Object> claims = new HashMap<>();
       claims.put("username", loginUser.getUsername());
+      claims.put("id", loginUser.getId());
       claims.put("password", loginUser.getPassword());
       return R.success(JwtUtil.createToken(claims));
     } else {
@@ -77,5 +79,10 @@ public class UserController {
   @PutMapping("put")
   public R putUserInfo(@RequestBody @Validated User user) {
     return userService.putUserInfo(user);
+  }
+
+  @PatchMapping("/putAvatar")
+  public R putUserAvatar(@RequestParam @URL String url) {
+    return userService.putUserAvatar(url);
   }
 }

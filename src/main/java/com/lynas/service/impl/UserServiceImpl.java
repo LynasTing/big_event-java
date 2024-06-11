@@ -5,10 +5,12 @@ import com.lynas.domain.entity.User;
 import com.lynas.mapper.UserMapper;
 import com.lynas.service.UserService;
 import com.lynas.utils.Md5Util;
+import com.lynas.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,6 +39,22 @@ public class UserServiceImpl implements UserService {
     try {
       user.setUpdateTime(LocalDateTime.now());
       userMapper.putUserInfo(user);
+      return R.success();
+    } catch (RuntimeException e) {
+      return R.error(e.getMessage());
+    }
+  }
+
+  /**
+   * 更新用户头像
+   * @param url
+   */
+  @Override
+  public R putUserAvatar(String url) {
+    try {
+      Map<String, Object> map = ThreadLocalUtil.get();
+      Integer id = Integer.parseInt((String) map.get("id"));
+      userMapper.putUserAvatar(url, id);
       return R.success();
     } catch (RuntimeException e) {
       return R.error(e.getMessage());

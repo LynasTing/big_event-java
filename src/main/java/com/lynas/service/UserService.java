@@ -9,4 +9,6 @@ public interface UserService {
   void register(String username, String password);
 
   R putUserInfo(User user);
+
+  R putUserAvatar(String url);
 }
