@@ -1,6 +1,9 @@
 package com.lynas.domain.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,10 +29,12 @@ public class Category implements Serializable {
     /**
      * 分类名称
      */
+    @NotEmpty
     private String categoryName;
     /**
      * 分类别名
      */
+    @NotEmpty
     private String categoryAlias;
     /**
      * 创建人ID
@@ -38,10 +43,9 @@ public class Category implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
     /**
      * 修改时间
      */
-    private Date updateTime;
-
+    private LocalDateTime updateTime;
 }
