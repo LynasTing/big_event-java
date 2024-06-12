@@ -11,4 +11,6 @@ public interface UserService {
   R putUserInfo(User user);
 
   R putUserAvatar(String url);
+
+  R putUserPwd(String newPwd);
 }

@@ -9,6 +9,7 @@ import com.lynas.utils.ThreadLocalUtil;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -84,5 +85,29 @@ public class UserController {
   @PatchMapping("/putAvatar")
   public R putUserAvatar(@RequestParam @URL String url) {
     return userService.putUserAvatar(url);
+  }
+
+  @PatchMapping("/putPwd")
+  public R putUserPwd(@RequestBody Map<String, String> map) {
+    String oldPwd = map.get("oldPwd");
+    String newPwd = map.get("newPwd");
+    String rePwd = map.get("rePwd");
+
+    if(!StringUtils.hasText(oldPwd) || !StringUtils.hasText(newPwd) || !StringUtils.hasText(rePwd)) {
+      return R.error("请传入完整参数");
+    }
+    if(oldPwd.equals(newPwd)) {
+      return R.error("新密码不能与旧密码相同");
+    }
+    if(!newPwd.equals(rePwd)) {
+      return R.error("两次输入的新密码不一致");
+    }
+    Map<String, Object> claims = ThreadLocalUtil.get();
+    String username = (String) claims.get("username");
+    User user = userService.findByUsername(username);
+    if(!user.getPassword().equals(Md5Util.getMD5String(oldPwd))) {
+      return R.error("原密码不正确");
+    }
+    return userService.putUserPwd(newPwd);
   }
 }

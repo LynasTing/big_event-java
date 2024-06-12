@@ -60,4 +60,20 @@ public class UserServiceImpl implements UserService {
       return R.error(e.getMessage());
     }
   }
+
+  /**
+   * 更新用户密码
+   * @param newPwd
+   */
+  @Override
+  public R putUserPwd(String newPwd) {
+    try {
+      Map<String, Object> map = ThreadLocalUtil.get();
+      Integer id = Integer.parseInt((String) map.get("id"));
+      userMapper.putUserPwd(Md5Util.getMD5String(newPwd), id);
+      return R.success();
+    }catch (RuntimeException e) {
+      return R.error(e.getMessage());
+    }
+  }
 }
