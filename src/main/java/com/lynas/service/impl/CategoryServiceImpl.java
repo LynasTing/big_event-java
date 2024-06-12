@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -23,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
    * @return
    */
   @Override
-  public R articleAdd(Category category) {
+  public R categoryAdd(Category category) {
     try {
       category.setCreateTime(LocalDateTime.now());
       category.setUpdateTime(LocalDateTime.now());
@@ -35,5 +36,16 @@ public class CategoryServiceImpl implements CategoryService {
     }catch (Exception e) {
       return R.error(e.getMessage());
     }
+  }
+
+  /**
+   * 分页查询分类
+   */
+  @Override
+  public List<Category> categoryPage() {
+    Map<String, Object> claims = ThreadLocalUtil.get();
+    Integer id = Integer.parseInt((String) claims.get("id"));
+    System.out.println("id + " + id);
+    return cm.categoryPage(id);
   }
 }

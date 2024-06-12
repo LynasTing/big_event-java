@@ -5,10 +5,9 @@ import com.lynas.domain.entity.R;
 import com.lynas.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/category")
@@ -17,7 +16,12 @@ public class CategoryController {
   private CategoryService cs;
 
   @PostMapping("/add")
-  public R articleAdd(@RequestBody @Validated Category category) {
-    return cs.articleAdd(category);
+  public R categoryAdd(@RequestBody @Validated Category category) {
+    return cs.categoryAdd(category);
+  }
+
+  @GetMapping("/page")
+  public R<List<Category>> categoryPage() {
+    return R.success(cs.categoryPage());
   }
 }
