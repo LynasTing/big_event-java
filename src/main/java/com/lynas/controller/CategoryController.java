@@ -25,10 +25,14 @@ public class CategoryController {
     return R.success(cs.categoryPage());
   }
 
-  @GetMapping("detail")
+  @GetMapping("/detail")
   public R categoryDetail(@RequestParam("id") Integer id) {
     return cs.categoryDetail(id);
   }
 
+  @PutMapping("/put")
+  public R categoryPut(@RequestBody @Validated(Category.put.class) Category category) {
+    return cs.categoryPut(category);
+  }
 
 }

@@ -58,4 +58,14 @@ public class CategoryServiceImpl implements CategoryService {
     Category category = cm.categoryDetail(id);
     return R.success(category);
   }
+
+  /**
+   * 更新文章分类
+   * @param category
+   */
+  @Override
+  public R categoryPut(Category category) {
+    cm.categoryPut(category);
+    return R.success();
+  }
 }

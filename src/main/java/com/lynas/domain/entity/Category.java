@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.groups.Default;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class Category implements Serializable {
     /**
      * ID
      */
+    @NotEmpty(groups = put.class)
     private String id;
     /**
      * 分类名称
@@ -51,4 +53,16 @@ public class Category implements Serializable {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
+
+    /**
+     * 没有指定校验项的属性默认属于Default分组
+     * 分组之间可以相互继承
+     */
+    public interface add extends Default {
+
+    }
+
+    public interface put extends Default {
+
+    }
 }

@@ -5,6 +5,7 @@ import com.lynas.domain.entity.R;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -19,4 +20,7 @@ public interface CategoryMapper {
 
   @Select("select * from category as c where c.id = #{id}")
   Category categoryDetail(Integer id);
+
+  @Update("update category set category_name = #{categoryName}, category_alias = #{categoryAlias}, update_time=now() where id = #{id}")
+  void categoryPut(Category category);
 }

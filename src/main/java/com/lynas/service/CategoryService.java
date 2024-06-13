@@ -12,4 +12,6 @@ public interface CategoryService {
   List<Category> categoryPage();
 
   R categoryDetail(Integer id);
+
+  R categoryPut(Category category);
 }
