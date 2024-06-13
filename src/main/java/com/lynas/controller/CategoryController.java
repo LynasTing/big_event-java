@@ -24,4 +24,11 @@ public class CategoryController {
   public R<List<Category>> categoryPage() {
     return R.success(cs.categoryPage());
   }
+
+  @GetMapping("detail")
+  public R categoryDetail(@RequestParam("id") Integer id) {
+    return cs.categoryDetail(id);
+  }
+
+
 }

@@ -48,4 +48,14 @@ public class CategoryServiceImpl implements CategoryService {
     System.out.println("id + " + id);
     return cm.categoryPage(id);
   }
+
+  /**
+   * 获取文章详情
+   * @param id
+   */
+  @Override
+  public R categoryDetail(Integer id) {
+    Category category = cm.categoryDetail(id);
+    return R.success(category);
+  }
 }

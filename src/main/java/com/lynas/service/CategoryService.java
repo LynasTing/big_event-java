@@ -10,4 +10,6 @@ public interface CategoryService {
 
 
   List<Category> categoryPage();
+
+  R categoryDetail(Integer id);
 }
