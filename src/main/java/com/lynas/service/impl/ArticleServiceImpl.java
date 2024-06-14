@@ -1,19 +1,22 @@
 package com.lynas.service.impl;
 
-import com.lynas.domain.entity.Category;
+import com.lynas.domain.entity.Article;
 import com.lynas.domain.entity.R;
+import com.lynas.mapper.ArticleMapper;
 import com.lynas.service.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
+  @Autowired
+  private ArticleMapper am;
   /**
-   * 新增分类
-   * @param category
-   * @return
+   * 新增文章
    */
   @Override
-  public R articleAdd(Category category) {
-    return null;
+  public R articleAdd(Article article) {
+    am.articleAdd(article);
+    return R.success();
   }
 }
