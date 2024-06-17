@@ -1,7 +1,7 @@
 package com.lynas.controller;
 
 import com.lynas.domain.entity.Article;
-import com.lynas.domain.entity.Category;
+import com.lynas.domain.entity.PageVo;
 import com.lynas.domain.entity.R;
 import com.lynas.service.ArticleService;
 import com.lynas.utils.ThreadLocalUtil;
@@ -29,5 +29,15 @@ public class ArticleController {
     article.setCreateUser(id);
     articleService.articleAdd(article);
     return R.success();
+  }
+
+  @GetMapping("/page")
+  public R<PageVo> articlePge(
+    Integer pageNum,
+    Integer pageSize,
+    @RequestParam(required = false) Integer categoryId,
+    @RequestParam(required = false) String state
+  ) {
+    return articleService.articlePge(pageNum, pageSize, categoryId, state);
   }
 }
