@@ -17,8 +17,10 @@ public class Demo {
         String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
         // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
       // EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
-      String ACCESS_ID = "LTAI5tL6cP3VobNUmMZDXaf9";
-      String ACCESS_SECRET = "CQGXy2NhjjgFEOGVfW81GH6tfmmsrH";
+      // String ACCESS_ID = "LTAI5tL6cP3VobNUmMZDXaf9";
+      // String ACCESS_SECRET = "CQGXy2NhjjgFEOGVfW81GH6tfmmsrH";
+      String ACCESS_ID = "1";
+      String ACCESS_SECRET = "2";
         // 填写Bucket名称，例如examplebucket。
         String bucketName = "lynas-big-event";
         // 填写Object完整路径，完整路径中不能包含Bucket名称，例如exampledir/exampleobject.txt。
