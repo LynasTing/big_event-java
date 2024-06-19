@@ -15,17 +15,15 @@ public class Demo {
     public static void main(String[] args) throws Exception {
         // Endpoint以华东1（杭州）为例，其它Region请按实际情况填写。
         String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-        // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
-      // EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
-      String ACCESS_ID = "1";
-      String ACCESS_SECRET = "2";
+        String A_ID = "1";
+        String A_S = "2";
         // 填写Bucket名称，例如examplebucket。
         String bucketName = "lynas-big-event";
         // 填写Object完整路径，完整路径中不能包含Bucket名称，例如exampledir/exampleobject.txt。
         String objectName = "001.png";
 
         // 创建OSSClient实例。
-        OSS ossClient = new OSSClientBuilder().build(endpoint, ACCESS_ID, ACCESS_SECRET);
+        OSS ossClient = new OSSClientBuilder().build(endpoint, A_ID, A_S);
 
         try {
             // 填写字符串。
