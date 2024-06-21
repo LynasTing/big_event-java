@@ -12,3 +12,8 @@ logging:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true # 开启驼峰命名和下划线命名的自动转换
+ali-oss:
+  endpoint: https://oss-cn-hangzhou.aliyuncs.com
+  accessId: LTAI5t7tW9mBHavUzCnY2LHV1
+  accessSecret: ohK9IoJcpObntIS5kJY3GNxwhPKejm1
+  bucketName: lynas-big-event
