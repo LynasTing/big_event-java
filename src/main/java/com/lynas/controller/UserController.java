@@ -9,6 +9,8 @@ import com.lynas.utils.ThreadLocalUtil;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/user")
@@ -24,6 +27,9 @@ public class UserController {
 
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private StringRedisTemplate rt;
 
   /**
    * 注册
@@ -55,7 +61,10 @@ public class UserController {
       claims.put("username", loginUser.getUsername());
       claims.put("id", loginUser.getId());
       claims.put("password", loginUser.getPassword());
-      return R.success(JwtUtil.createToken(claims));
+      ValueOperations<String, String> operations = rt.opsForValue();
+      String token = JwtUtil.createToken(claims);
+      operations.set(token, token, 168, TimeUnit.HOURS);
+      return R.success(token);
     } else {
       return R.error("密码错误");
     }
@@ -88,7 +97,7 @@ public class UserController {
   }
 
   @PatchMapping("/putPwd")
-  public R putUserPwd(@RequestBody Map<String, String> map) {
+  public R putUserPwd(@RequestBody Map<String, String> map, @RequestHeader("Authorization") String token) {
     String oldPwd = map.get("oldPwd");
     String newPwd = map.get("newPwd");
     String rePwd = map.get("rePwd");
@@ -108,6 +117,9 @@ public class UserController {
     if(!user.getPassword().equals(Md5Util.getMD5String(oldPwd))) {
       return R.error("原密码不正确");
     }
+    // 删除redis中对应的token
+    ValueOperations<String, String> operations = rt.opsForValue();
+    operations.getOperations().delete(token);
     return userService.putUserPwd(newPwd);
   }
 }
